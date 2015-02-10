@@ -56,10 +56,10 @@ function show_graph($postID, $numberofdays) {
         	position: 'none'
         },
         chartArea: {
-			left: '5%',
+			left: '15%',
 			top: '3%',
 			width: '90%',
-			height: '90%' 
+			height: '90%'
 		},
 		curveType: 'function',
 		width: '100%',

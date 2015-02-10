@@ -5,7 +5,7 @@ Tags: widget, chart, graph, diagram, pupular, pupularity, visits, counter
 Author: Piotr Pesta
 Requires at least: 2.8.0
 Tested up to: 4.1
-Stable tag: 0.5
+Stable tag: 0.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,8 +31,10 @@ Or just add .zip file as a new plugin in your Wordpress administration panel.
 
 1. Post Popularity Chart Widget Lite.
 2. Post Popularity Chart Widget Lite visible on right block.
-2. Options menu.
+3. Options menu.
 
 == Changelog ==
 * 0.5
 Initial Release
+* 0.6.1
+Chart Width fix (visits values are now visible)
