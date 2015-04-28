@@ -34,10 +34,11 @@ Or just add .zip file as a new plugin in your Wordpress administration panel.
 3. Options menu.
 
 == Changelog ==
-* 0.5
-Initial Release
-* 0.6.1
-Chart Width fix (visits values are now visible)
-* 0.9.2
-Chart now shows days with 0 hits
-Chart style fix
+
+= 0.5 =
+* Initial Release
+= 0.6.1 =
+* Chart Width fix (visits values are now visible)
+= 0.9.2 =
+* Chart now shows days with 0 hits
+* Chart style fix
