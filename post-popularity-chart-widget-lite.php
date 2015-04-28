@@ -4,11 +4,10 @@ Plugin Name: Post Popularity Chart Widget Lite
 Plugin URI: http://smartfan.pl/
 Description: Widget which displays popularity chart / graph for posts.
 Author: Piotr Pesta
-Version: 0.6.1
+Version: 0.9.2
 Author URI: http://smartfan.pl/
 License: GPL12
 */
-
 include 'functions.php';
 
 $options = get_option('post_popularity_graph');
@@ -95,6 +94,7 @@ extract($args);
 $title = apply_filters('widget_title', $instance['title']);
 $numberofdays = $instance['numberofdays'];
 $numberofdays = trim(preg_replace('/\s+/', '', $numberofdays));
+$numberofdays = $numberofdays - 1;
 $ignoredpages = $instance['ignoredpages'];
 $ignoredpages = trim(preg_replace('/\s+/', '', $ignoredpages));
 $ignoredpages = explode(",",$ignoredpages);

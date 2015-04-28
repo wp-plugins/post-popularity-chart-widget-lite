@@ -4,8 +4,8 @@ Plugin URI: http://smartfan.pl/
 Tags: widget, chart, graph, diagram, pupular, pupularity, visits, counter
 Author: Piotr Pesta
 Requires at least: 2.8.0
-Tested up to: 4.1
-Stable tag: 0.6.1
+Tested up to: 4.2.1
+Stable tag: 0.9.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,3 +38,6 @@ Or just add .zip file as a new plugin in your Wordpress administration panel.
 Initial Release
 * 0.6.1
 Chart Width fix (visits values are now visible)
+* 0.9.2
+Chart now shows days with 0 hits
+Chart style fix
