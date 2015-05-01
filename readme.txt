@@ -1,4 +1,5 @@
 === Post Popularity Chart Widget Lite ===
+Contributors: Piotr Pesta
 Plugin Name: Post Popularity Chart Widget Lite
 Plugin URI: http://smartfan.pl/
 Tags: widget, chart, graph, diagram, pupular, pupularity, visits, counter
