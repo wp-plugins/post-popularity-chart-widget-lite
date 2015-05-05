@@ -1,22 +1,47 @@
-=== Post Popularity Chart Widget Lite ===
+=== Post Popularity Chart Widget ===
 Contributors: Piotr Pesta
-Plugin Name: Post Popularity Chart Widget Lite
+Plugin Name: Post Popularity Chart Widget
 Plugin URI: http://smartfan.pl/
 Tags: widget, chart, graph, diagram, pupular, pupularity, visits, counter
 Author: Piotr Pesta
 Requires at least: 2.8.0
 Tested up to: 4.2.1
-Stable tag: 0.9.2
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Widget which displays popularity chart / graph for posts based on mumber of visits. Lite version.
+Post Popularity Chart Widget, by which you display a graph with statistics of visits of any article on your site.
 
 == Description ==
 
-Widget which displays popularity chart / graph for posts based on mumber of visits. Lite version. Soon version with more options and graph styles.
+Post Popularity Chart Widget, by which you display a graph with statistics of visits of any article on your site. Widget on an ongoing basis collects data on visits selected by you posts and displays them in a clear and legible graphic chart. Widget is very simple to configure and accompanying documentation makes it even easier.
 
-Widget could be not compatible with catching plugins, like W3 Total Cache etc. Remember, that you need to wait couple of days until widget gather data to show charts.
+Appearance and operation of the widget can be freely modified, and this is thanks to the possibility of changing virtually all the settings. What can be changed?
+
+= Features =
+* Responsive widget (dynamically adjust the page dimensions and resolution of the device)
+* Uses Google Charts API
+* Very easy to use - just install, put anywhere, set your preferred options and use anytime
+* You can change :
+- titles of individual axes
+- the color of chart and its background
+- range of days which is to include
+- exclusion of specific pages and categories
+- change the chart type (at the moment there are 3 types)
+
+It should be noted that the widget may not work with plugs serving to store cached page, such as. W3.
+
+Widget can be freely configured by using the available options. Each option has an extensive descriptions, so nobody should have no problem to understand what it does. In the settings menu you can change (in order):
+
+* Title
+* Number of days to include statistics
+* A list of ID numbers of excluded articles (chart there will not be displayed)
+* A list of ID numbers of excluded categories
+* Type of chart
+* Description(title) X-axis and Y
+* The background color and the color of the graph line
+
+The widget automatically deletes the data older than 30 days, so there is no problem with excessive cluttering of the database.
 
 == Installation ==
 
@@ -30,9 +55,13 @@ Or just add .zip file as a new plugin in your Wordpress administration panel.
 
 == Screenshots ==
 
-1. Post Popularity Chart Widget Lite.
-2. Post Popularity Chart Widget Lite visible on right block.
+1. Post Popularity Chart Widget.
+2. Post Popularity Chart Widget visible on right block.
 3. Options menu.
+4. Column Chart.
+5. Area Chart.
+6. Line Chart.
+7. Area Chart Wide.
 
 == Changelog ==
 
@@ -43,3 +72,6 @@ Or just add .zip file as a new plugin in your Wordpress administration panel.
 = 0.9.2 =
 * Chart now shows days with 0 hits
 * Chart style fix
+= 1.0.0 =
+* Now you can change: titles of individual axes, the color of chart and its background
+* New chart type (at the moment there are 3 types)

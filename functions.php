@@ -1,26 +1,27 @@
 <?php
 
-//zbieranie danych
+// Function responsible for data gathering in SQL database
 function add_hits($postID) {
 	global $wpdb;
 	$post_popularity_graph_table = $wpdb->prefix . 'post_popularity_graph';
-	if (!preg_match('/bot|spider|crawler|slurp|curl|^$/i', $_SERVER['HTTP_USER_AGENT'])) { //jeśli nie istnieje rekord hit_count z podanym ID oraz ID nie jest równe 1 oraz odwiedzający nie jest botem
-		$wpdb->query($wpdb->prepare("INSERT INTO $post_popularity_graph_table (post_id, date) VALUES (%d, NOW())", $postID)); //dodaje do tablicy id postu, date oraz hit
-		$wpdb->query("DELETE FROM $post_popularity_graph_table WHERE date <= NOW() - INTERVAL 30 DAY"); //removes database entry older than 30 days
+	if (!preg_match('/bot|spider|crawler|slurp|curl|^$/i', $_SERVER['HTTP_USER_AGENT'])) { // If there is no hit_count with proper ID and visitor is not a bot proceed
+		$result = $wpdb->query("INSERT INTO $post_popularity_graph_table (post_id, date) VALUES ($postID, NOW())"); // Adds to SQL table post ID, date and hit count
+		$wpdb->query("DELETE FROM $post_popularity_graph_table WHERE date <= NOW() - INTERVAL 30 DAY"); // Removes database entry older than 30 days
 	}
-} 
+}
 
-function show_graph($postID, $numberofdays) {
+// Function responsible for displaying the chart  
+function show_graph($postID, $numberofdays, $chartstyle, $haxistitle, $vaxistitle, $backgroundcolor, $chartcolor) {
 	global $wpdb;
 	$post_popularity_graph_table = $wpdb->prefix . 'post_popularity_graph';
 	if ($wpdb->query("SELECT post_id FROM $post_popularity_graph_table WHERE post_id = $postID")) {
-		$result = $wpdb->get_results($wpdb->prepare("SELECT COUNT(post_id) FROM $post_popularity_graph_table WHERE post_id = %d AND date >= DATE(DATE_SUB(NOW(), INTERVAL %d DAY)) GROUP BY CAST(date AS DATE)", $postID, $numberofdays), ARRAY_A);
-		$date = $wpdb->get_results($wpdb->prepare("SELECT CAST(date AS DATE) FROM $post_popularity_graph_table WHERE post_id = %d AND date >= DATE(DATE_SUB(NOW(), INTERVAL %d DAY)) GROUP BY CAST(date AS DATE)", $postID, $numberofdays), ARRAY_A);
+		$result = $wpdb->get_results("SELECT COUNT(post_id) FROM $post_popularity_graph_table WHERE post_id = $postID AND date >= DATE(DATE_SUB(NOW(), INTERVAL $numberofdays DAY)) GROUP BY CAST(date AS DATE)", ARRAY_A);
+		$date = $wpdb->get_results("SELECT CAST(date AS DATE) FROM $post_popularity_graph_table WHERE post_id = $postID AND date >= DATE(DATE_SUB(NOW(), INTERVAL $numberofdays DAY)) GROUP BY CAST(date AS DATE)", ARRAY_A);
 		
-//przedział dat - listowanie na podstawie $numberofdays
 	$date1 = date("Y, m, d", strtotime("- $numberofdays day"));
 	$date2 = date("Y, m, d");
-	
+
+// Function responsible for creation of date range
 	function returnDates($fromdate, $todate) {
 		$fromdate = DateTime::createFromFormat('Y, m, d', $fromdate);
 		$todate = DateTime::createFromFormat('Y, m, d', $todate);
@@ -33,10 +34,10 @@ function show_graph($postID, $numberofdays) {
 	
 	$datePeriod = returnDates($date1, $date2);
 
-//zbieranie dat w tablicach
+// Gathering dates in arrays
 	foreach($datePeriod as $dateLoop) {
 		$dateLoop = $dateLoop->format('Y, m, d');
-		$tablica[] = $dateLoop; //zapisuje wyniki w tablicy
+		$tablica[] = $dateLoop;
 	}
 	foreach($date as $dateMainLoop) {
 		static $i = 0;
@@ -44,10 +45,11 @@ function show_graph($postID, $numberofdays) {
 		++$i;
 		$dateMainLoop = DateTime::createFromFormat('Y-m-d', $dateMainLoop);
 		$dateMainLoop = $dateMainLoop->format('Y, m, d');
-		$tablica2[] = $dateMainLoop; //zapisuje wyniki w tablicy
+		$tablica2[] = $dateMainLoop;
 	}
 
 ?>
+<!-- Google Charts script -->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
                  google.load('visualization', '1', {packages: ['corechart']});
@@ -61,6 +63,7 @@ function show_graph($postID, $numberofdays) {
 
       data.addRows([
 <?php
+// Loop responsible for throwing of dates and data to javascript.
 	for($i = 0; $i <= $numberofdays; ++$i){
 		$value = $tablica[$i];
 		$valueFormat = DateTime::createFromFormat('Y, m, d', $value);
@@ -83,11 +86,11 @@ function show_graph($postID, $numberofdays) {
 
       var options = {
         hAxis: {
-          title: 'Time',
+          title: "<?php echo $haxistitle; ?>",
           textPosition: 'none'
         },
         vAxis: {
-          title: 'Visits',
+          title: "<?php echo $vaxistitle; ?>",
           format: '0',
           viewWindow: {
  	     	min: 0
@@ -104,10 +107,12 @@ function show_graph($postID, $numberofdays) {
 		},
 		curveType: 'function',
 		width: '100%',
-		height: '100%'
+		height: '100%',
+		backgroundColor: "<?php echo $backgroundcolor; ?>",
+		colors: ["<?php echo $chartcolor; ?>"]
       };
 
-      var chart = new google.visualization.LineChart(
+      var chart = new google.visualization.<?php echo $chartstyle; ?>(
         document.getElementById('ex0'));
 
       chart.draw(data, options);
@@ -120,4 +125,5 @@ function show_graph($postID, $numberofdays) {
 <?php
 	}
 }
+
 ?>
