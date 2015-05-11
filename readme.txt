@@ -1,5 +1,6 @@
 === Post Popularity Chart Widget ===
 Contributors: Piotr Pesta
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EEDF5TV3M2WVG
 Plugin Name: Post Popularity Chart Widget
 Plugin URI: http://smartfan.pl/
 Tags: widget, chart, graph, diagram, pupular, pupularity, visits, counter
